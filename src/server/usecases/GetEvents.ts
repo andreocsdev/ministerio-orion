@@ -4,7 +4,15 @@ export class GetEvents {
   async execute() {
     let events;
     try {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
       events = await prisma.eventos.findMany({
+        where: {
+          date: {
+            gte: today,
+          },
+        },
         include: {
           grupo: {
             select: {

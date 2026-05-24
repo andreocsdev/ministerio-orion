@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { UpdateEvent } from "../../../../src/server/usecases/UpdateEvent";
 import { requireAuth } from "../../../../src/server/lib/route-guards";
 import { z } from "zod";
 
 export async function PATCH(
-  request: Request,
-  { params }: { params: { id: string } },
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     await requireAuth(request);
