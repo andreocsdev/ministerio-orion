@@ -27,7 +27,15 @@ type ApiResponse<T> = {
 };
 
 function getClientApiUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_API_URL}${path}`;
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  const normalizedPath =
+    path === "/create-event"
+      ? "/api/events"
+      : path.startsWith("/api/") || path === "/api"
+        ? path
+        : `/api${path.startsWith("/") ? "" : "/"}${path}`;
+
+  return `${baseUrl}${normalizedPath}`;
 }
 
 async function clientApiFetch<T>(

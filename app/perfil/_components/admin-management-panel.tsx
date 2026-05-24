@@ -77,7 +77,15 @@ function UserSelectItem({ user, checked, onToggle }: UserSelectItemProps) {
 }
 
 function getClientApiUrl(path: string) {
-  return `${process.env.NEXT_PUBLIC_API_URL}${path}`;
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  const normalizedPath =
+    path === "/create-group"
+      ? "/api/groups"
+      : path.startsWith("/api/") || path === "/api"
+        ? path
+        : `/api${path.startsWith("/") ? "" : "/"}${path}`;
+
+  return `${baseUrl}${normalizedPath}`;
 }
 
 async function clientApiFetch<T>(

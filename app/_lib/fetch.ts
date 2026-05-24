@@ -5,9 +5,14 @@ const getBody = <T>(c: Response | Request): Promise<T> => {
 };
 
 const getUrl = (contextUrl: string): string => {
-  const newUrl = new URL(`${process.env.NEXT_PUBLIC_API_URL}${contextUrl}`);
-  const requestUrl = new URL(`${newUrl}`);
-  return requestUrl.toString();
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  const normalizedPath = contextUrl.startsWith("http")
+    ? contextUrl
+    : contextUrl.startsWith("/api/") || contextUrl === "/api"
+      ? contextUrl
+      : `/api${contextUrl.startsWith("/") ? "" : "/"}${contextUrl}`;
+
+  return new URL(normalizedPath, baseUrl).toString();
 };
 
 const getHeaders = async (headers?: HeadersInit): Promise<HeadersInit> => {
