@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { AddUserToGroup } from "../../../src/server/usecases/AddUserToGroup";
+import { AddUserToGroup } from "../../../../src/server/usecases/AddUserToGroup";
 
 const Schema = z.object({
   groupId: z.string(),
