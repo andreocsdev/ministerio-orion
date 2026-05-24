@@ -5,7 +5,7 @@ import { z } from "zod";
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     await requireAuth(request);
@@ -23,7 +23,7 @@ export async function PATCH(
     if (!parsed.success) {
       return NextResponse.json(
         { error: "Invalid body", details: parsed.error },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -36,7 +36,7 @@ export async function PATCH(
   } catch (err) {
     return NextResponse.json(
       { error: (err as Error).message },
-      { status: 401 }
+      { status: 401 },
     );
   }
 }

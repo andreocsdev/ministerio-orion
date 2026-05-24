@@ -5,7 +5,9 @@ import { prisma } from "./db";
 type AppRole = "ADMIN" | "USER";
 
 async function getSession(request: Request) {
-  return auth.api.getSession({ headers: fromNodeHeaders(Object.fromEntries(request.headers)) });
+  return auth.api.getSession({
+    headers: fromNodeHeaders(Object.fromEntries(request.headers)),
+  });
 }
 
 export async function requireAuth(request: Request) {

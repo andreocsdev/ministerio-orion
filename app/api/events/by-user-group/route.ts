@@ -9,6 +9,9 @@ export async function GET(request: Request) {
     const result = await usecase.execute({ userId });
     return NextResponse.json(result);
   } catch (err) {
-    return NextResponse.json({ error: (err as Error).message }, { status: 401 });
+    return NextResponse.json(
+      { error: (err as Error).message },
+      { status: 401 },
+    );
   }
 }

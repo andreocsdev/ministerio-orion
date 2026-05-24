@@ -4,32 +4,32 @@ export class GetGroups {
   async execute() {
     try {
       const groups = await prisma.grupos.findMany({
-      select: {
-        id: true,
-        name: true,
-        users: {
-          select: {
-            id: true,
-            name: true,
-            email: true,
+        select: {
+          id: true,
+          name: true,
+          users: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
+            orderBy: {
+              name: "asc",
+            },
           },
-          orderBy: {
-            name: "asc",
+          eventos: {
+            select: {
+              id: true,
+              name: true,
+            },
+            orderBy: {
+              date: "asc",
+            },
           },
         },
-        eventos: {
-          select: {
-            id: true,
-            name: true,
-          },
-          orderBy: {
-            date: "asc",
-          },
+        orderBy: {
+          name: "asc",
         },
-      },
-      orderBy: {
-        name: "asc",
-      },
       });
 
       return groups;

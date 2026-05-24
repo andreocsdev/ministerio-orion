@@ -5,20 +5,20 @@ export class GetEvents {
     let events;
     try {
       events = await prisma.eventos.findMany({
-      include: {
-        grupo: {
-          select: {
-            name: true,
-            users: {
-              select: {
-                name: true,
-                image: true,
+        include: {
+          grupo: {
+            select: {
+              name: true,
+              users: {
+                select: {
+                  name: true,
+                  image: true,
+                },
               },
             },
           },
         },
-      },
-      orderBy: { date: "asc" },
+        orderBy: { date: "asc" },
       });
     } catch (err) {
       return [];

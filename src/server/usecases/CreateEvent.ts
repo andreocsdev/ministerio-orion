@@ -33,7 +33,10 @@ export class CreateEvent {
         date: result.date.toISOString(),
       };
     } catch (err) {
-      throw new Error("Database error or not configured: " + (err instanceof Error ? err.message : String(err)));
+      throw new Error(
+        "Database error or not configured: " +
+          (err instanceof Error ? err.message : String(err)),
+      );
     }
   }
 }
